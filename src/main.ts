@@ -58,7 +58,7 @@ export default class MemopadPlugin extends Plugin {
 			}
 		}
 
-		new Notice("Captured to Memopad");
+		new Notice("Captured to memopad");
 	}
 }
 
@@ -102,7 +102,9 @@ class CaptureModal extends Modal {
 		const buttonContainer = contentEl.createDiv({ cls: "memopad-buttons" });
 
 		const captureBtn = buttonContainer.createEl("button", { text: "Capture", cls: "mod-cta" });
-		captureBtn.addEventListener("click", () => this.capture());
+		captureBtn.addEventListener("click", () => {
+			void this.capture();
+		});
 
 		const cancelBtn = buttonContainer.createEl("button", { text: "Cancel" });
 		cancelBtn.addEventListener("click", () => this.close());
@@ -111,7 +113,7 @@ class CaptureModal extends Modal {
 		this.inputEl.addEventListener("keydown", (e) => {
 			if (e.key === "Enter" && !e.shiftKey) {
 				e.preventDefault();
-				this.capture();
+				void this.capture();
 			}
 			if (e.key === "Escape") {
 				this.close();

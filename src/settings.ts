@@ -65,8 +65,6 @@ export class MemopadSettingTab extends PluginSettingTab {
 
 		containerEl.empty();
 
-		containerEl.createEl("h2", { text: "Memopad settings" });
-
 		// Inbox file path
 		new Setting(containerEl)
 			.setName("Inbox file path")
@@ -83,11 +81,11 @@ export class MemopadSettingTab extends PluginSettingTab {
 
 		// Default category
 		new Setting(containerEl)
-			.setName("Default category")
+			.setName("Default task category")
 			.setDesc("Default category for tasks when no keywords match.")
 			.addText((text) =>
 				text
-					.setPlaceholder("personal")
+					.setPlaceholder("Personal")
 					.setValue(this.plugin.settings.defaultCategory)
 					.onChange(async (value) => {
 						this.plugin.settings.defaultCategory = value || DEFAULT_SETTINGS.defaultCategory;
@@ -96,18 +94,16 @@ export class MemopadSettingTab extends PluginSettingTab {
 			);
 
 		// Task keywords section
-		containerEl.createEl("h3", { text: "Task keywords" });
-		containerEl.createEl("p", {
-			text: "Words that trigger task detection when they appear at the start of input.",
-			cls: "setting-item-description",
-		});
+		new Setting(containerEl).setName("Task keywords").setHeading();
 
 		new Setting(containerEl)
-			.setName("Task keywords")
-			.setDesc("Comma-separated list of keywords.")
+			.setName("Keywords")
+			.setDesc(
+				"Comma-separated list of words that trigger task detection when they appear at the start of input.",
+			)
 			.addTextArea((text) =>
 				text
-					.setPlaceholder("fix, call, email, send...")
+					.setPlaceholder("Fix, call, email, send...")
 					.setValue(this.plugin.settings.taskKeywords.join(", "))
 					.onChange(async (value) => {
 						this.plugin.settings.taskKeywords = value
@@ -119,14 +115,14 @@ export class MemopadSettingTab extends PluginSettingTab {
 			);
 
 		// Entry types section
-		containerEl.createEl("h3", { text: "Entry types" });
+		new Setting(containerEl).setName("Entry types").setHeading();
 
 		new Setting(containerEl)
-			.setName("Entry types")
+			.setName("Types")
 			.setDesc("Comma-separated list of entry types (e.g., note, idea, log, task).")
 			.addTextArea((text) =>
 				text
-					.setPlaceholder("note, idea, log, task")
+					.setPlaceholder("Note, idea, log, task")
 					.setValue(this.plugin.settings.entryTypes.join(", "))
 					.onChange(async (value) => {
 						this.plugin.settings.entryTypes = value
@@ -138,24 +134,25 @@ export class MemopadSettingTab extends PluginSettingTab {
 			);
 
 		// Categories section
-		containerEl.createEl("h3", { text: "Categories" });
-		containerEl.createEl("p", {
-			text: "Categories are used to classify tasks. Each category has keywords that trigger automatic categorization.",
-			cls: "setting-item-description",
-		});
+		new Setting(containerEl).setName("Categories").setHeading();
+
+		new Setting(containerEl).setDesc(
+			"Categories are used to classify tasks. Each category has keywords that trigger automatic categorization.",
+		);
 
 		const categoriesContainer = containerEl.createDiv({ cls: "memopad-categories-container" });
 		this.renderCategories(categoriesContainer);
 
 		// Add category button
 		new Setting(containerEl).addButton((button) =>
-			button.setButtonText("Add category").onClick(async () => {
+			button.setButtonText("Add category").onClick(() => {
 				this.plugin.settings.categories.push({
 					name: "new-category",
 					keywords: [],
 				});
-				await this.plugin.saveSettings();
-				this.display();
+				void this.plugin.saveSettings().then(() => {
+					this.display();
+				});
 			}),
 		);
 	}
@@ -167,7 +164,7 @@ export class MemopadSettingTab extends PluginSettingTab {
 			const categoryDiv = container.createDiv({ cls: "memopad-category-item" });
 
 			new Setting(categoryDiv)
-				.setName(`Category: ${category.name}`)
+				.setName(category.name)
 				.addText((text) =>
 					text
 						.setPlaceholder("Category name")
@@ -184,16 +181,17 @@ export class MemopadSettingTab extends PluginSettingTab {
 					button
 						.setButtonText("Remove")
 						.setWarning()
-						.onClick(async () => {
+						.onClick(() => {
 							this.plugin.settings.categories.splice(index, 1);
-							await this.plugin.saveSettings();
-							this.display();
+							void this.plugin.saveSettings().then(() => {
+								this.display();
+							});
 						}),
 				);
 
 			new Setting(categoryDiv).setName("Keywords").addTextArea((text) =>
 				text
-					.setPlaceholder("jira, meeting, client...")
+					.setPlaceholder("Jira, meeting, client...")
 					.setValue(category.keywords.join(", "))
 					.onChange(async (value) => {
 						const cat = this.plugin.settings.categories[index];
