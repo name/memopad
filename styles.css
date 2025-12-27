@@ -1,0 +1,94 @@
+/* Memopad capture modal styles */
+
+.memopad-capture-modal {
+	padding: 1rem;
+}
+
+.memopad-capture-modal h2 {
+	margin-top: 0;
+	margin-bottom: 1rem;
+}
+
+.memopad-input {
+	width: 100%;
+	min-height: 80px;
+	padding: 0.75rem;
+	margin-bottom: 1rem;
+	border: 1px solid var(--background-modifier-border);
+	border-radius: 4px;
+	background-color: var(--background-primary);
+	color: var(--text-normal);
+	font-family: inherit;
+	font-size: var(--font-ui-medium);
+	resize: vertical;
+}
+
+.memopad-input:focus {
+	outline: none;
+	border-color: var(--interactive-accent);
+	box-shadow: 0 0 0 2px var(--interactive-accent-hover);
+}
+
+.memopad-input::placeholder {
+	color: var(--text-muted);
+}
+
+.memopad-preview-container {
+	margin-bottom: 1rem;
+}
+
+.memopad-preview-container label {
+	display: block;
+	font-size: var(--font-ui-small);
+	color: var(--text-muted);
+	margin-bottom: 0.25rem;
+}
+
+.memopad-preview {
+	padding: 0.75rem;
+	background-color: var(--background-secondary);
+	border-radius: 4px;
+	font-family: var(--font-monospace);
+	font-size: var(--font-ui-small);
+	color: var(--text-normal);
+	min-height: 1.5em;
+	word-wrap: break-word;
+}
+
+.memopad-buttons {
+	display: flex;
+	justify-content: flex-end;
+	gap: 0.5rem;
+}
+
+.memopad-buttons button {
+	padding: 0.5rem 1rem;
+}
+
+/* Settings page styles */
+
+.memopad-categories-container {
+	margin-bottom: 1rem;
+}
+
+.memopad-category-item {
+	padding: 1rem;
+	margin-bottom: 0.75rem;
+	background-color: var(--background-secondary);
+	border-radius: 6px;
+	border: 1px solid var(--background-modifier-border);
+}
+
+.memopad-category-item .setting-item {
+	border-top: none;
+	padding-top: 0.5rem;
+}
+
+.memopad-category-item .setting-item:first-child {
+	padding-top: 0;
+}
+
+.memopad-category-item textarea {
+	min-height: 60px;
+	width: 100%;
+}
