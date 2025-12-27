@@ -4,9 +4,8 @@ A quick capture plugin for Obsidian that standardizes your thoughts into a singl
 
 Dump thoughts from anywhere; the plugin auto-formats them as tasks, notes, ideas, or logs with proper metadata. No folders, no complexity—just one `Memopad.md` file that's easy to process later with Tasks, Dataview, or manual review.
 
-<!-- TODO: Add demo video -->
 <p align="center">
-  <em>Demo video coming soon</em>
+  <video src="https://github.com/user-attachments/assets/ab805955-933f-4ede-b700-2684e76aceaf" width="600" controls></video>
 </p>
 
 ## Features
