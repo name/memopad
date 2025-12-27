@@ -1,6 +1,6 @@
 {
 	"name": "memopad",
-	"version": "1.0.0",
+	"version": "1.0.2",
 	"description": "A quick capture modal that standardizes your scratchpad into a single inbox file.",
 	"main": "main.js",
 	"type": "module",

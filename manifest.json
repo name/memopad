@@ -1,7 +1,7 @@
 {
 	"id": "memopad",
 	"name": "Memopad",
-	"version": "1.0.0",
+	"version": "1.0.2",
 	"minAppVersion": "0.15.0",
 	"description": "A quick capture modal that standardizes your scratchpad into a single inbox file.",
 	"author": "char",
