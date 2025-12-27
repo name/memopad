@@ -155,4 +155,4 @@ Add, edit, or remove categories. Each category has:
 
 ## License
 
-MIT
+0BSD
